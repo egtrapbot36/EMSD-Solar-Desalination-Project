@@ -13,7 +13,8 @@
 #define PIN_TDS A1
 #define PIN_PH A2
 
-#define TANK_AREA 100 // square centimeter, multiply by water level [cm] to get volume [mL]
+#define SERIESRESISTOR 550 // for water level sensor
+#define TANK_AREA 70.9 // square centimeter, multiply by water level [cm] to get volume [mL]
 #define AVG_COUNT 10 // number of measurements to take to average
 #define DISCARD_COUNT 2 // number of measurements to discard (2 each for too big/small)
 

@@ -3,7 +3,8 @@
 
 #include <Arduino.h>
 
-extern unsigned long cur_mark;
+#define MIN_RUN_TIME 500
+#define MAX_RUN_TIME 10000
 
 class Relay {
   

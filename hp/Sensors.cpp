@@ -29,7 +29,7 @@ void setup_sensors()
   pinMode(PIN_PH, INPUT);
 
   // water level
-
+  pinMode(PIN_WATER_LEVEL, INPUT);
 }
 
 // Celcius
@@ -43,10 +43,19 @@ double get_temp() {
 
 // mL
 double get_volume() {
+  // height[cm] = -0.136*r+113 // TUNE
+  double r; // resistance of strip
+  double height; // [cm]
   for (int i=0; i<AVG_COUNT; i++) {
-    buffer_array[i] = 0; // FILL THIS IN
+    r = SERIESRESISTOR/(1023.0/(double)analogRead(PIN_WATER_LEVEL)-1); // voltage divider
+//    height = -0.136*r+113; // [cm]
+    height = -r/60+26.39;
+    if (height < 0) height = 0;
+    buffer_array[i] = height*TANK_AREA; // [mL]
+//    buffer_array[i] = r; // for testing and calibrating
   }
-  return smooth_avg();
+  return 470; // wrong
+//  return smooth_avg();
 }
 
 double get_pH() {
