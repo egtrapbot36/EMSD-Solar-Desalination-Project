@@ -62,7 +62,7 @@ double get_pH() {
   double voltage;
   for (int i=0; i<AVG_COUNT; i++) {
     voltage = (double)analogRead(PIN_PH)/1023.0*5.0;
-    buffer_array[i] = 3.0*voltage+1.5;
+    buffer_array[i] = 3.17*voltage+0.832;
   }
   return smooth_avg();
 }

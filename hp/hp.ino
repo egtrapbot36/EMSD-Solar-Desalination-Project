@@ -114,7 +114,8 @@ void loop() {
 
 void test() {
   temp_cur = 22.0;
-  Serial.println(get_ppm());
+  Serial.println(get_pH());
+  delay(1000);
 }
 
 void print_sensor_readings() {
