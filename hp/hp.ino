@@ -13,6 +13,7 @@ Team members: Amen Assefa, Elio Bourcart, Emilio Guevara, Shitong (Michael) Pang
 #define PIN_RELAY_NA 6
 #define PIN_RELAY_NB 7
 #define PIN_RELAY_SALT 8
+#define PIN_RELAY_FRESH 9
 
 // System states used across files
 double v_cur; // [mL]
@@ -25,6 +26,7 @@ Relay relay_base(PIN_RELAY_BASE);
 Relay relay_nA(PIN_RELAY_NA);
 Relay relay_nB(PIN_RELAY_NB);
 Relay relay_salt(PIN_RELAY_SALT);
+Relay relay_fresh(PIN_RELAY_FRESH);
 
 // interval and timing setup
 unsigned long cur_mark = 0; // current time
@@ -35,6 +37,8 @@ unsigned long hp_interval = 120000; // 2 minutes
 unsigned long hp_prev_mark = 0;
 unsigned long salt_interval = 86400000; // 24 hours 
 unsigned long salt_prev_mark = 0; // salt water intake
+unsigned long fresh_interval = 1800000; // drip every 30 minutes
+unsigned long fresh_prev_mark = 0;
 
 // motor run time in milliseconds
 unsigned long acid_motor_interval = 0; 
@@ -104,17 +108,29 @@ void loop() {
     salt_prev_mark = cur_mark;
   }
 
+  
+  cur_mark = millis();
+  // drip every 30 minutes
+  if ((cur_mark-fresh_prev_mark) >= fresh_interval) {
+    Serial.println("Watering Plants");
+    relay_fresh.turn_on_for(10000); // max amount ~46 mL, roughly the daily usage
+
+    cur_mark = millis();
+    fresh_prev_mark = cur_mark;
+  }
+
   // check if motors need to be stopped
   relay_acid.update_relay();
   relay_base.update_relay();
   relay_nA.update_relay();
   relay_nB.update_relay();
   relay_salt.update_relay();
+  relay_fresh.update_relay();
 }
 
 void test() {
-  temp_cur = 22.0;
-  Serial.println(get_pH());
+  update_sensors();
+  print_sensor_readings();
   delay(1000);
 }
 

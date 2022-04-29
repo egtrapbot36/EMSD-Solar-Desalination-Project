@@ -54,8 +54,7 @@ double get_volume() {
     buffer_array[i] = height*TANK_AREA; // [mL]
 //    buffer_array[i] = r; // for testing and calibrating
   }
-  return 470; // wrong
-//  return smooth_avg();
+  return smooth_avg();
 }
 
 double get_pH() {
