@@ -1,6 +1,7 @@
 #include "Relay.h"
 
 extern unsigned long cur_mark;
+extern double v_cur;
 
 Relay::Relay(byte pin) {
   this->pin = pin;
@@ -30,6 +31,9 @@ void Relay::turn_on_for(unsigned long run_time) {
   this->start_time = cur_mark;
   digitalWrite(this->pin, LOW);
   this->is_on = true;
+  if (this->pin != 6 && this->pin != 7) {
+    v_cur += run_time*4.6; 
+  }
 }
 
 void Relay::turn_off() {

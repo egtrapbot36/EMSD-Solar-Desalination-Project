@@ -8,8 +8,6 @@ extern unsigned long acid_motor_interval;
 extern unsigned long base_motor_interval; 
 extern unsigned long nA_motor_interval; 
 extern unsigned long nB_motor_interval; 
-//extern unsigned long salt_motor_interval; 
-//extern unsigned long fresh_motor_interval; 
 
 // calculate net concentration of H+; negative value denotes net OH-
 // pH 7 returns 0, patched with smooth linear in the middle
@@ -56,8 +54,4 @@ void set_motor_intervals() {
   }
   nA_motor_interval = v_to_t(v_add_n*RATIO_NA);
   nB_motor_interval = v_to_t(v_add_n*RATIO_NB);
-  
-  // ignore water intake for now
-//  salt_motor_interval = 0;
-//  fresh_motor_interval = 0;
 }

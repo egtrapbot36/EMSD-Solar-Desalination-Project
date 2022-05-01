@@ -51,8 +51,8 @@ double get_volume() {
 //    height = -0.136*r+113; // [cm]
     height = -r/60+26.39;
     if (height < 0) height = 0;
-    buffer_array[i] = height*TANK_AREA; // [mL]
-//    buffer_array[i] = r; // for testing and calibrating
+    buffer_array[i] = height;//*TANK_AREA; // [mL]
+    buffer_array[i] = r; // for testing and calibrating
   }
   return smooth_avg();
 }
@@ -76,7 +76,7 @@ double get_ppm() {
 }
 
 void update_sensors() {
-  v_cur = get_volume();
+//  v_cur = get_volume();
   temp_cur = get_temp();
   ppm_cur = get_ppm();
   pH_cur = get_pH();

@@ -47,7 +47,7 @@ unsigned long nA_motor_interval = 0;
 unsigned long nB_motor_interval = 0; 
 
 
-bool testing = true;
+bool testing = false;
 
 
 void setup() {
@@ -160,11 +160,11 @@ void print_motor_intervals() {
 
 void send_sensor_data() {
 
-  Serial1.println(relay_acid.is_on);
-  Serial1.println(relay_base.is_on);
-  Serial1.println(relay_nA.is_on);
-  Serial1.println(relay_salt.is_on);
-  Serial1.println(relay_fresh.is_on);
+  Serial1.println(relay_acid.is_running());
+  Serial1.println(relay_base.is_running());
+  Serial1.println(relay_nA.is_running());
+  Serial1.println(relay_salt.is_running());
+  Serial1.println(relay_fresh.is_running());
   Serial1.println("1.0"); 
   Serial1.println(pH_cur);
   Serial1.println(ppm_cur);
