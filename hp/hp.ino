@@ -53,6 +53,7 @@ bool testing = true;
 void setup() {
   setup_sensors();
   Serial.begin(9600);
+  Serial1.begin(9600);
 }
 
 
@@ -68,8 +69,11 @@ void loop() {
   if (sensor_prev_mark == 0 || (unsigned long)(cur_mark-sensor_prev_mark) >= sensor_interval) { 
     Serial.println("Updating Sensors ...");
     update_sensors();
-    Serial.println("Done.\n");
+    Serial.println();
     print_sensor_readings();
+    Serial.println("Sending sensor data to wifi board...\n");
+    send_sensor_data();
+    Serial.println("Done.\n");
     
     cur_mark = millis();
     sensor_prev_mark = cur_mark; 
@@ -152,4 +156,17 @@ void print_motor_intervals() {
 //  Serial.println("Salt Water: " + String(salt_motor_interval) + " ms: ");
 //  Serial.println("Fresh Water: " + String(fresh_motor_interval) + " ms: ");
   Serial.println();
+}
+
+void send_sensor_data() {
+
+  Serial1.println(relay_acid.is_on);
+  Serial1.println(relay_base.is_on);
+  Serial1.println(relay_nA.is_on);
+  Serial1.println(relay_salt.is_on);
+  Serial1.println(relay_fresh.is_on);
+  Serial1.println("1.0"); 
+  Serial1.println(pH_cur);
+  Serial1.println(ppm_cur);
+  Serial1.println(temp_cur);
 }
