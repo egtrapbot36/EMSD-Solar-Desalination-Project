@@ -8,15 +8,15 @@ Team members: Amen Assefa, Elio Bourcart, Emilio Guevara, Shitong (Michael) Pang
 #include "Sensors.h"
 #include "Relay.h"
 
-#define PIN_RELAY_ACID 4
-#define PIN_RELAY_BASE 5
-#define PIN_RELAY_NA 6
-#define PIN_RELAY_NB 7
-#define PIN_RELAY_SALT 8
-#define PIN_RELAY_FRESH 9
+#define PIN_RELAY_ACID 5 // pump #3 
+#define PIN_RELAY_BASE 4 // pump #4
+#define PIN_RELAY_NA 8 // pump #5
+#define PIN_RELAY_NB 9 // pump #6
+#define PIN_RELAY_SALT 7 // pump #1
+#define PIN_RELAY_FRESH 6 // pump #2
 
 // System states used across files
-double v_cur; // [mL]
+double v_cur = 2000; // [mL]
 double pH_cur;
 double ppm_cur;
 double temp_cur; 
