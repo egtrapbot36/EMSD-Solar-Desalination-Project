@@ -21,10 +21,10 @@ bool Relay::is_running() {
 // turn motor on for ____ amount of time
 void Relay::turn_on_for(unsigned long run_time) { 
   cur_mark = millis();
-  if (run_time <= MIN_RUN_TIME) {
+  if (run_time != 0 && run_time <= MIN_RUN_TIME) {
     run_time = MIN_RUN_TIME;
   } else if (run_time >= MAX_RUN_TIME) {
-//    run_time = MAX_RUN_TIME;
+    run_time = MAX_RUN_TIME;
   }
   if (run_time == 0) return;
   this->run_time = run_time;
