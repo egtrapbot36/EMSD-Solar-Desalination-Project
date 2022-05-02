@@ -12,11 +12,11 @@ Team members: Amen Assefa, Elio Bourcart, Emilio Guevara, Shitong (Michael) Pang
 #define PIN_RELAY_BASE 4 // pump #4
 #define PIN_RELAY_NA 8 // pump #5
 #define PIN_RELAY_NB 9 // pump #6
-#define PIN_RELAY_SALT 7 // pump #1
-#define PIN_RELAY_FRESH 6 // pump #2
+#define PIN_RELAY_SALT 6 // pump #2
+#define PIN_RELAY_FRESH 7 // pump #1
 
 // System states used across files
-double v_cur = 2000; // [mL]
+double v_cur = 2300; // [mL]
 double pH_cur;
 double ppm_cur;
 double temp_cur; 
@@ -92,7 +92,9 @@ void loop() {
 //    relay_base.turn_on_for(4000);
 //    relay_nA.turn_on_for(6000);
 //    relay_nB.turn_on_for(8000);
-    // run pumps (with algorithm)
+//    relay_salt.turn_on_for(1000000);
+
+//     run pumps (with algorithm)
     relay_acid.turn_on_for(acid_motor_interval);
     relay_base.turn_on_for(base_motor_interval);
     relay_nA.turn_on_for(nA_motor_interval);
@@ -133,9 +135,8 @@ void loop() {
 }
 
 void test() {
-  update_sensors();
-  print_sensor_readings();
-  delay(1000);
+  Serial.println(get_ppm());
+  delay(2000);
 }
 
 void print_sensor_readings() {

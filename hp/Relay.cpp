@@ -24,7 +24,7 @@ void Relay::turn_on_for(unsigned long run_time) {
   if (run_time <= MIN_RUN_TIME) {
     run_time = MIN_RUN_TIME;
   } else if (run_time >= MAX_RUN_TIME) {
-    run_time = MAX_RUN_TIME;
+//    run_time = MAX_RUN_TIME;
   }
   if (run_time == 0) return;
   this->run_time = run_time;
@@ -32,7 +32,7 @@ void Relay::turn_on_for(unsigned long run_time) {
   digitalWrite(this->pin, LOW);
   this->is_on = true;
   if (this->pin != 6 && this->pin != 7) {
-    v_cur += run_time*4.6; 
+    v_cur += run_time*4.6/1000; 
   }
 }
 
